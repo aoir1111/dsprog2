@@ -198,5 +198,5 @@ def main(page: ft.Page):
     # add application's root control to the page
     page.add(calc)
 
-
+    
 ft.app(target=main)
