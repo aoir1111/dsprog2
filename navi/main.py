@@ -1,41 +1,64 @@
 import flet as ft
 
-def main(page: ft.Page):
-
-    rail = ft.NavigationRail(
-        selected_index=0,
-        label_type=ft.NavigationRailLabelType.ALL,
-        # extended=True,
-        min_width=100,
-        min_extended_width=400,
-        leading=ft.FloatingActionButton(icon=ft.Icons.CREATE, text="Add"),
-        group_alignment=-0.9,
-        destinations=[
-            ft.NavigationRailDestination(
-                icon=ft.Icons.FAVORITE_BORDER, selected_icon=ft.Icons.FAVORITE, label="First"
-            ),
-            ft.NavigationRailDestination(
-                icon=ft.Icon(ft.Icons.BOOKMARK_BORDER),
-                selected_icon=ft.Icon(ft.Icons.BOOKMARK),
-                label="Second",
-            ),
-            ft.NavigationRailDestination(
-                icon=ft.Icons.SETTINGS_OUTLINED,
-                selected_icon=ft.Icon(ft.Icons.SETTINGS),
-                label_content=ft.Text("Settings"),
-            ),
-        ],
-        on_change=lambda e: print("Selected destination:", e.control.selected_index),
-    )
-
+def main(page):
+    page.title = "ListTile Examples"
     page.add(
-        ft.Row(
-            [
-                rail,
-                ft.VerticalDivider(width=1),
-                ft.Column([ ft.Text("Body!")], alignment=ft.MainAxisAlignment.START, expand=True),
-            ],
-            expand=True,
+        ft.Card(
+            content=ft.Container(
+                width=500,
+                content=ft.Column(
+                    [
+                        ft.ListTile(
+                            title=ft.Text("One-line list tile"),
+                        ),
+                        ft.ListTile(title=ft.Text("One-line dense list tile"), dense=True),
+                        ft.ListTile(
+                            leading=ft.Icon(ft.Icons.SETTINGS),
+                            title=ft.Text("One-line selected list tile"),
+                            selected=True,
+                        ),
+                        ft.ListTile(
+                            leading=ft.Image(src="/icons/icon-192.png", fit="contain"),
+                            title=ft.Text("One-line with leading control"),
+                        ),
+                        ft.ListTile(
+                            title=ft.Text("One-line with trailing control"),
+                            trailing=ft.PopupMenuButton(
+                                icon=ft.Icons.MORE_VERT,
+                                items=[
+                                    ft.PopupMenuItem(text="Item 1"),
+                                    ft.PopupMenuItem(text="Item 2"),
+                                ],
+                            ),
+                        ),
+                        ft.ListTile(
+                            leading=ft.Icon(ft.Icons.ALBUM),
+                            title=ft.Text("One-line with leading and trailing controls"),
+                            trailing=ft.PopupMenuButton(
+                                icon=ft.Icons.MORE_VERT,
+                                items=[
+                                    ft.PopupMenuItem(text="Item 1"),
+                                    ft.PopupMenuItem(text="Item 2"),
+                                ],
+                            ),
+                        ),
+                        ft.ListTile(
+                            leading=ft.Icon(ft.Icons.SNOOZE),
+                            title=ft.Text("Two-line with leading and trailing controls"),
+                            subtitle=ft.Text("Here is a second title."),
+                            trailing=ft.PopupMenuButton(
+                                icon=ft.Icons.MORE_VERT,
+                                items=[
+                                    ft.PopupMenuItem(text="Item 1"),
+                                    ft.PopupMenuItem(text="Item 2"),
+                                ],
+                            ),
+                        ),
+                    ],
+                    spacing=0,
+                ),
+                padding=ft.padding.symmetric(vertical=10),
+            )
         )
     )
 
